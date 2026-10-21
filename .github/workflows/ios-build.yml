@@ -26,10 +26,11 @@ env:
 jobs:
   build:
     name: Build, test and package unsigned IPA
-    # macOS 26 runners are regularly saturated. The macOS 15 image ships
-    # Xcode 26.x (26.3 at the time of writing), which contains the iOS 26 SDK
-    # needed by the Liquid Glass APIs, so the build stays on a stable pool.
-    runs-on: macos-15
+    # GitHub reports capacity constraints on its macOS arm64 runners. The
+    # Intel macOS 15 image ships Xcode 26.x (26.3 at the time of writing) with
+    # the iOS 26 SDK required by the Liquid Glass APIs, so use that pool until
+    # the arm64 queues recover. The device binary is still arm64.
+    runs-on: macos-15-intel
     timeout-minutes: 45
 
     steps:
