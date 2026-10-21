@@ -102,6 +102,8 @@ Déclencheurs : push sur `main`, pull request vers `main`, exécution manuelle.
 
 L'image `macos-26` de GitHub Actions fournit, au moment de la rédaction, Xcode 26.6 (SDK iOS 26.5) et des simulateurs iPhone récents. C'est la version nécessaire pour compiler les API Liquid Glass tout en conservant un déploiement iOS 18.
 
+Lors de l'exécution vérifiée du 21/10/2026 : Xcode 26.6 (17F113), Swift 6.3.3, SDK `iPhoneOS26.5`, 32 tests réussis.
+
 Le workflow tente de sélectionner Xcode 26.6, puis retombe sur le Xcode par défaut de l'image s'il est absent. Il choisit ensuite automatiquement un simulateur iPhone disponible pour les tests et imprime les versions réelles à chaque exécution ; il ne suppose pas silencieusement une version.
 
 ## 7. Vérifications réalisées sous Windows
@@ -109,7 +111,7 @@ Le workflow tente de sélectionner Xcode 26.6, puis retombe sur le Xcode par dé
 - Validation JSON de `Restaurant.json`.
 - Contrôle de l'arborescence et des fichiers référencés.
 - Relecture des signatures d'API Apple (documentation officielle).
-- Vérification des symboles SF utilisés dans les données (par test, exécuté en CI).
+- Vérification des symboles SF utilisés dans les données (tests exécutés en CI).
 - Aucun build Swift local : la compilation réelle est celle de GitHub Actions.
 
 ## 8. Dépannage

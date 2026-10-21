@@ -6,6 +6,23 @@ Le workflow produit un **IPA non signé**. Il n'est **pas installable tel quel**
 
 Le workflow ne contient aucun certificat, aucun mot de passe et aucun secret Apple.
 
+### Dernière exécution vérifiée (21 octobre 2026)
+
+| Champ | Valeur |
+| --- | --- |
+| Exécution | [#4 — 39599116247](https://github.com/ViciniStudio/BBFactoryApp/actions/runs/39599116247) |
+| Commit | `ceead59` |
+| Artefact | `BBFactoryApp-Unsigned-IPA` |
+| Fichier | `BBFactoryApp-1.0.0-4-unsigned.ipa` |
+| Taille | 829 332 octets |
+| SHA-256 | `a66ed13423a3140d6e646ad4afcf5b3d932ffa3adf2654320c5ed2cb584b20c5` |
+| Tests | 32 exécutés, 0 échec |
+| Toolchain | Xcode 26.6 (17F113), Swift 6.3.3, SDK iOS 26.5 |
+
+L'IPA a été retéléchargé depuis l'artefact puis contrôlé : `Payload/BBFactoryApp.app` contient le binaire arm64, `Info.plist`, `Restaurant.json` et `PrivacyInfo.xcprivacy` ; aucun `embedded.mobileprovision` ni dossier `_CodeSignature` n'est présent. Le hash recalculé correspond à celui du workflow.
+
+Le numéro d'exécution augmente à chaque push et apparaît dans le nom de l'IPA ; `CFBundleVersion`, lui, reste défini dans `project.yml`.
+
 ## 2. Déclencher une compilation
 
 Trois possibilités :

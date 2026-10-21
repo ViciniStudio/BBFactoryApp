@@ -11,13 +11,28 @@ Application iOS native (SwiftUI) pour **B&B FACTORY**, le restaurant de burgers 
 | Code source | complet |
 | Contenu (horaires, carte, actus) | issu de sources publiques, vérifié le 21/10/2026 |
 | Compilation locale Windows | impossible (pas de Xcode) |
-| Compilation GitHub Actions | **à exécuter après le premier push** |
-| Tests unitaires | écrits, à exécuter sur le runner macOS |
-| IPA non signé | **pas encore généré** |
+| Compilation GitHub Actions | **réussie** le 21/10/2026 (exécution #4) |
+| Tests unitaires | **32 tests réussis**, 0 échec |
+| IPA non signé | **généré** : `BBFactoryApp-1.0.0-4-unsigned.ipa` |
 | Signature eSign | non effectuée |
 | Installation sur iPhone | non effectuée |
 
-Aucun IPA n'existe tant que le workflow n'a pas réussi. Aucune app n'est signée ni installée par ce dépôt.
+Le workflow a produit un véritable IPA non signé et l'a publié dans l'artefact **`BBFactoryApp-Unsigned-IPA`**. Cet IPA n'est **ni signé ni installé** : il doit être signé (eSign ou autre) avant toute installation sur un iPhone.
+
+Dernière exécution vérifiée : [GitHub Actions #39599116247](https://github.com/ViciniStudio/BBFactoryApp/actions/runs/39599116247), commit `ceead59`.
+
+| Champ | Valeur vérifiée |
+| --- | --- |
+| Fichier | `BBFactoryApp-1.0.0-4-unsigned.ipa` |
+| Taille | 829 332 octets (≈ 810 Kio) |
+| SHA-256 | `a66ed13423a3140d6e646ad4afcf5b3d932ffa3adf2654320c5ed2cb584b20c5` |
+| Bundle ID | `fr.vicinistudio.bbfactory` |
+| Version | 1.0.0 (build 1) |
+| Minimum iOS | 18.0 |
+| Plateforme | `iphoneos`, arm64 |
+| Signature | absente (`codesign` négatif, aucun `mobileprovision`) |
+
+L'IPA a été retéléchargé depuis l'artefact et contrôlé : racine `Payload/`, binaire arm64, `Info.plist`, `Restaurant.json`, `PrivacyInfo.xcprivacy`, aucune signature ni profil embarqué. Le SHA-256 correspond à celui publié par le workflow.
 
 ## Fonctionnalités
 
@@ -67,7 +82,7 @@ Détails et références Apple : [`docs/LIQUID_GLASS.md`](docs/LIQUID_GLASS.md).
 
 ## Stack
 
-- Swift 5, SwiftUI, iOS 18 minimum (SDK iOS 26.5).
+- Swift 5 (mode langage), SwiftUI, iOS 18 minimum (SDK iOS 26.5, Xcode 26.6).
 - `@Observable` / MVVM léger.
 - Aucune dépendance externe, aucun réseau au runtime.
 - XCTest.
@@ -156,6 +171,8 @@ xcodebuild test \
   -destination 'platform=iOS Simulator,name=iPhone 17'
 ```
 
+La CI ne dépend pas du nom « iPhone 17 » : elle sélectionne automatiquement le premier simulateur iPhone disponible et a exécuté **32 tests, 0 échec**.
+
 Couverture : horaires et fuseau, intégrité du JSON, URLs, favoris, chargement, filtres, symboles SF.
 
 ## Accessibilité et vie privée
@@ -177,8 +194,8 @@ Couverture : horaires et fuseau, intégrité du JSON, URLs, favoris, chargement,
 
 ## Limites connues
 
-- L'IPA n'a pas encore été produit au moment de la rédaction.
-- Le rendu Liquid Glass n'a pas été vérifié visuellement (pas de Mac sur le poste de développement).
+- L'IPA produit est **non signé** : il n'est pas installable tel quel et doit être signé avant l'installation.
+- Le rendu Liquid Glass n'a pas été vérifié visuellement sur un appareil (pas de Mac sur le poste de développement) ; il a été compilé avec le SDK iOS 26.5 et les tests passent.
 - Les horaires du vendredi soir (18:45) et les prix doivent être confirmés par l'établissement.
 - Aucune photo officielle ni logo officiel n'est embarqué : l'icône et les illustrations sont originales.
 - Aucune réservation, commande ou fidélité intégrée : l'app renvoie vers le téléphone et le site officiel.
