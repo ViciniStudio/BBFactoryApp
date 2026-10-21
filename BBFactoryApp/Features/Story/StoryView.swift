@@ -43,12 +43,7 @@ struct StoryView: View {
                 endPoint: .bottomTrailing
             )
 
-            Image("StoryKitchen")
-                .resizable()
-                .scaledToFill()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .clipped()
-                .accessibilityHidden(true)
+            HeroPhoto(name: "StoryKitchen")
 
             LinearGradient(
                 stops: [

@@ -62,12 +62,7 @@ struct HomeView: View {
                 endPoint: .bottomTrailing
             )
 
-            Image("HeroBurger")
-                .resizable()
-                .scaledToFill()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .clipped()
-                .accessibilityHidden(true)
+            HeroPhoto(name: "HeroBurger")
 
             LinearGradient(
                 stops: [

@@ -130,6 +130,23 @@ struct FilterChip: View {
     }
 }
 
+/// Fills its proposed area with a photo, cropping it without letting the
+/// image's intrinsic size widen the surrounding layout.
+struct HeroPhoto: View {
+    let name: String
+
+    var body: some View {
+        Color.clear
+            .overlay {
+                Image(name)
+                    .resizable()
+                    .scaledToFill()
+            }
+            .clipped()
+            .accessibilityHidden(true)
+    }
+}
+
 /// Marks the portion in which a dish is served, for recipes offered as a
 /// starter and as a main course.
 struct MenuCourseBadge: View {
