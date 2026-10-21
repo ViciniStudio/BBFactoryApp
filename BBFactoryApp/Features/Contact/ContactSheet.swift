@@ -183,9 +183,7 @@ struct ContactSheet: View {
     }
 
     private func openMaps() {
-        if let url = AppURL.maps(restaurant.location.directionsURL) {
-            openURL(url)
-        }
+        MapsService.openDirections(to: restaurant)
     }
 
     private func copyAddress() {

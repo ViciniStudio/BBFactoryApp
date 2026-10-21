@@ -57,7 +57,7 @@ Le déploiement à iOS 18 évite d'exclure des appareils compatibles. Toutes les
 
 ## 4. Où Liquid Glass n'est **pas** utilisé
 
-Apple recommande de limiter le nombre d'effets de verre simultanés pour préserver la lisibilité et les performances. Les cartes de contenu (horaires, plats, actualités, services) utilisent donc `SurfaceCard` : fond opaque chaud, trait fin, coins continus. Le verre est réservé à la navigation, aux contrôles flottants et aux états mis en avant.
+Apple recommande de limiter le nombre d'effets de verre simultanés pour préserver la lisibilité et les performances. Les cartes de contenu (horaires, plats, services) utilisent donc `SurfaceCard` : fond opaque chaud, trait fin, coins continus. Le verre est réservé à la navigation, aux contrôles flottants et aux états mis en avant.
 
 Cette hiérarchie évite l'écueil « tout est flou » : le contenu reste stable, contrasté et lisible, tandis que les commandes se détachent.
 
@@ -70,7 +70,7 @@ Cette hiérarchie évite l'écueil « tout est flou » : le contenu reste stable
 ## 6. Accessibilité
 
 - **Dynamic Type** : toutes les tailles de texte utilisent des styles dynamiques (`.body`, `.title2`, `.footnote`, `Font.system(.largeTitle, design: .serif)`). Aucune taille de police fixe pour le texte. Les icônes conservent une taille fixe, ce qui est admis.
-- **VoiceOver** : chaque bouton icône possède un libellé (`GlassIconButton`, boutons de favoris, toolbar). Les illustrations (`BurgerArtwork`, `AmbientGlow`) sont `accessibilityHidden`. Les cartes combinent leurs informations quand c'est pertinent.
+- **VoiceOver** : chaque bouton icône possède un libellé (`GlassIconButton`, boutons de favoris, toolbar). La photo du héros et `AmbientGlow` sont `accessibilityHidden` ; le héros conserve un libellé global. Les cartes combinent leurs informations quand c'est pertinent.
 - **Contrastes** : l'accent cuivre est décliné en deux variantes. `accentText` (plus sombre en clair, plus clair en sombre) est utilisé pour le texte. Le verre n'est jamais le seul support d'une information critique.
 - **Reduce Motion** : `AmbientGlow` désactive son animation avec `@Environment(\.accessibilityReduceMotion)`. Les transitions de chargement sont également désactivées.
 - **Mode clair / sombre** : chaque couleur est définie via `UIColor` dynamique ; le matériau et le verre suivent l'apparence système.

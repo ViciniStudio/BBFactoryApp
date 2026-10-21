@@ -22,13 +22,5 @@ enum AppURL {
         return url
     }
 
-    static func maps(_ rawValue: String) -> URL? {
-        guard let url = URL(string: rawValue),
-              let scheme = url.scheme?.lowercased(),
-              scheme == "https" || scheme == "http"
-        else { return nil }
-        return url
-    }
-
     static let privacyPolicy = URL(string: "https://www.apple.com/fr/privacy/")!
 }

@@ -160,9 +160,7 @@ struct PracticalView: View {
 
                     HStack(spacing: 10) {
                         Button {
-                            if let url = AppURL.maps(restaurant.location.directionsURL) {
-                                openURL(url)
-                            }
+                            MapsService.openDirections(to: restaurant)
                         } label: {
                             Label("Itinéraire", systemImage: "map.fill")
                                 .frame(maxWidth: .infinity)

@@ -5,7 +5,6 @@ enum AppTab: Hashable {
     case menu
     case story
     case practical
-    case news
 }
 
 struct RootView: View {
@@ -66,10 +65,6 @@ private struct MainTabView: View {
 
             Tab("Pratique", systemImage: "mappin.and.ellipse", value: AppTab.practical) {
                 PracticalView(restaurant: restaurant)
-            }
-
-            Tab("Actus", systemImage: "newspaper", value: AppTab.news) {
-                NewsView(restaurant: restaurant)
             }
         }
         .bbMinimizingTabBar()

@@ -24,7 +24,6 @@ struct HomeView: View {
                     hero
                     quickActions
                     todayCard
-                    newsSection
                     menuSection
                     locationCard
                     footer
@@ -57,23 +56,38 @@ struct HomeView: View {
 
     private var hero: some View {
         ZStack(alignment: .bottomLeading) {
-            RoundedRectangle(cornerRadius: 34, style: .continuous)
-                .fill(
-                    LinearGradient(
-                        colors: [BBTheme.heroTop, BBTheme.heroBottom],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
+            LinearGradient(
+                colors: [BBTheme.heroTop, BBTheme.heroBottom],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
 
-            AmbientGlow()
-                .frame(width: 250, height: 250)
-                .offset(x: 120, y: -60)
+            Image("HeroBurger")
+                .resizable()
+                .scaledToFill()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .clipped()
+                .accessibilityHidden(true)
 
-            BurgerArtwork()
-                .frame(width: 205, height: 205)
-                .offset(x: 112, y: -32)
-                .opacity(0.96)
+            LinearGradient(
+                stops: [
+                    .init(color: .black.opacity(0.78), location: 0),
+                    .init(color: .black.opacity(0.48), location: 0.42),
+                    .init(color: .clear, location: 0.78)
+                ],
+                startPoint: .leading,
+                endPoint: .trailing
+            )
+
+            LinearGradient(
+                stops: [
+                    .init(color: .clear, location: 0.38),
+                    .init(color: .black.opacity(0.48), location: 0.66),
+                    .init(color: .black.opacity(0.92), location: 1)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
 
             VStack(alignment: .leading, spacing: 13) {
                 HStack(alignment: .top) {
@@ -140,9 +154,7 @@ struct HomeView: View {
                     title: "Itinéraire",
                     subtitle: "12 rue Lobau"
                 ) {
-                    if let url = AppURL.maps(restaurant.location.directionsURL) {
-                        openURL(url)
-                    }
+                    MapsService.openDirections(to: restaurant)
                 }
 
                 QuickActionButton(
@@ -213,27 +225,6 @@ struct HomeView: View {
         }
     }
 
-    // MARK: - News
-
-    @ViewBuilder
-    private var newsSection: some View {
-        if let latest = restaurant.news.sorted(by: { $0.date > $1.date }).first {
-            VStack(alignment: .leading, spacing: 12) {
-                SectionHeader(
-                    title: "En ce moment",
-                    subtitle: "Les actualités confirmées de la maison"
-                )
-
-                NavigationLink {
-                    NewsDetailView(item: latest, restaurant: restaurant)
-                } label: {
-                    NewsHighlightCard(item: latest)
-                }
-                .buttonStyle(.plain)
-            }
-        }
-    }
-
     // MARK: - Menu
 
     private var menuSection: some View {
@@ -293,9 +284,7 @@ struct HomeView: View {
 
                 HStack(spacing: 10) {
                     Button {
-                        if let url = AppURL.maps(restaurant.location.directionsURL) {
-                            openURL(url)
-                        }
+                        MapsService.openDirections(to: restaurant)
                     } label: {
                         Label("Itinéraire", systemImage: "arrow.triangle.turn.up.right.diamond.fill")
                             .frame(maxWidth: .infinity)
@@ -408,49 +397,5 @@ private struct FeaturedDishCard: View {
             RoundedRectangle(cornerRadius: 22, style: .continuous)
                 .stroke(BBTheme.hairline, lineWidth: 0.8)
         )
-    }
-}
-
-private struct NewsHighlightCard: View {
-    let item: Restaurant.NewsItem
-
-    var body: some View {
-        SurfaceCard {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack(spacing: 8) {
-                    Text(item.isDistinction ? "DISTINCTION" : "ACTUALITÉ")
-                        .font(.caption2.weight(.bold))
-                        .tracking(1)
-                        .foregroundStyle(BBTheme.accentText)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(BBTheme.accent.opacity(0.13), in: Capsule())
-                    Text(item.dateText)
-                        .font(.caption)
-                        .foregroundStyle(BBTheme.secondaryInk)
-                    Spacer()
-                }
-
-                Text(item.title)
-                    .font(.system(.headline, design: .serif, weight: .semibold))
-                    .foregroundStyle(BBTheme.ink)
-                    .multilineTextAlignment(.leading)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                Text(item.summary)
-                    .font(.subheadline)
-                    .foregroundStyle(BBTheme.secondaryInk)
-                    .lineLimit(3)
-                    .multilineTextAlignment(.leading)
-
-                HStack {
-                    SourceLink(name: item.sourceName, url: AppURL.web(item.sourceURL))
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .font(.caption.weight(.bold))
-                        .foregroundStyle(BBTheme.secondaryInk)
-                }
-            }
-        }
     }
 }

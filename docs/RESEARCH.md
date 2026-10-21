@@ -100,7 +100,7 @@ Aucun événement daté à venir, aucune offre promotionnelle et aucun menu spé
 - **Boissons, desserts, menus spéciaux** : non publiés.
 - **Tarifs et organisation des événements privés / mariages** : non publiés.
 - **Second numéro** : les mentions légales du site affichent `+33 7 71 18 73 44`. Il n'est pas utilisé dans l'application, faute de confirmation de son usage public.
-- **Photos** : la galerie du site contient des visuels, mais leur licence d'utilisation dans une application n'est pas documentée. Aucune photo n'est embarquée ; l'application utilise des illustrations SwiftUI originales.
+- **Photos** : la galerie du site officiel contient des visuels de burgers. Une photo officielle est utilisée pour le héros à la demande explicite du client ; sa source et la vérification des droits sont documentées dans `docs/ASSETS.md`.
 - **Logo** : le logo public a inspiré la palette, mais l'application ne le copie pas et utilise une icône originale. Une autorisation écrite serait nécessaire pour utiliser le logo officiel.
 
 ## 7. Sources consultées
@@ -128,6 +128,6 @@ Aucun événement daté à venir, aucune offre promotionnelle et aucun menu spé
 4. Procédure de réservation et de commande souhaitée.
 5. Autorisation d'utiliser le logo et des photos officielles.
 6. Coordonnées de contact définitives (numéro principal, second numéro).
-7. Contenu des actualités et mentions légales de l'application.
+7. Mentions légales de l'application et droits de diffusion de la photo du héros.
 
 Toute correction se fait dans `BBFactoryApp/Resources/Config/Restaurant.json`, sans modifier le code.

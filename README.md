@@ -9,7 +9,7 @@ Application iOS native (SwiftUI) pour **B&B FACTORY**, le restaurant de burgers 
 | Élément | Statut |
 | --- | --- |
 | Code source | complet |
-| Contenu (horaires, carte, actus) | issu de sources publiques, vérifié le 21/10/2026 |
+| Contenu (horaires, carte) | issu de sources publiques, vérifié le 21/10/2026 |
 | Compilation locale Windows | impossible (pas de Xcode) |
 | Compilation GitHub Actions | **réussie** le 21/10/2026 (exécution #4) |
 | Tests unitaires | **32 tests réussis**, 0 échec |
@@ -27,7 +27,7 @@ Dernière exécution vérifiée : [GitHub Actions #39599116247](https://github.c
 | Taille | 829 332 octets (≈ 810 Kio) |
 | SHA-256 | `a66ed13423a3140d6e646ad4afcf5b3d932ffa3adf2654320c5ed2cb584b20c5` |
 | Bundle ID | `fr.vicinistudio.bbfactory` |
-| Version | 1.0.0 (build 1) |
+| Version | 1.0.0 (build 2) |
 | Minimum iOS | 18.0 |
 | Plateforme | `iphoneos`, arm64 |
 | Signature | absente (`codesign` négatif, aucun `mobileprovision`) |
@@ -37,10 +37,10 @@ L'IPA a été retéléchargé depuis l'artefact et contrôlé : racine `Payload/
 ## Fonctionnalités
 
 ### Accueil
-- héros éditorial avec identité de la maison ;
+- héros éditorial avec photo réelle d'un burger B&B FACTORY ;
 - état d'ouverture calculé en direct (fuseau `Europe/Paris`) ;
 - actions rapides : appeler, itinéraire, carte ;
-- actualité mise en avant ;
+- itinéraire natif ouvert directement sur le trajet vers le restaurant ;
 - sélection de plats ;
 - adresse et accès.
 
@@ -64,11 +64,6 @@ L'IPA a été retéléchargé depuis l'artefact et contrôlé : racine `Payload/
 - adresse, copie, itinéraire ;
 - services et moyens de paiement ;
 - contact téléphonique et e-mail.
-
-### Actualités
-- informations datées et sourcées (Coupe de France du Burger 2026) ;
-- détail, lien vers la source, partage ;
-- liens Instagram et Facebook.
 
 ## Design
 
@@ -100,7 +95,7 @@ BBFactoryApp/
 │   ├── Models/             # Restaurant, horaires
 │   ├── Services/           # chargement, favoris, URLs
 │   └── Utilities/
-├── Features/               # Accueil, Carte, Maison, Pratique, Actus, Contact
+├── Features/               # Accueil, Carte, Maison, Pratique, Contact
 ├── Resources/
 │   ├── Assets.xcassets/
 │   ├── Config/Restaurant.json
@@ -119,8 +114,7 @@ Tout le contenu éditorial est dans **`BBFactoryApp/Resources/Config/Restaurant.
 - horaires (`weekday`, `opens`, `closes`) ;
 - services, paiements ;
 - histoire, distinctions ;
-- carte, catégories, prix ;
-- actualités et sources.
+- carte, catégories, prix.
 
 Après modification : mettre à jour `lastVerified`, vérifier le JSON, puis relancer le workflow.
 
@@ -173,7 +167,7 @@ xcodebuild test \
 
 La CI ne dépend pas du nom « iPhone 17 » : elle sélectionne automatiquement le premier simulateur iPhone disponible et a exécuté **32 tests, 0 échec**.
 
-Couverture : horaires et fuseau, intégrité du JSON, URLs, favoris, chargement, filtres, symboles SF.
+Couverture : horaires et fuseau, intégrité du JSON, URLs, itinéraire natif, favoris, chargement, filtres, symboles SF.
 
 ## Accessibilité et vie privée
 
@@ -191,13 +185,14 @@ Couverture : horaires et fuseau, intégrité du JSON, URLs, favoris, chargement,
 - [`docs/BUILD.md`](docs/BUILD.md) — Windows, XcodeGen, commandes, dépannage.
 - [`docs/RELEASE.md`](docs/RELEASE.md) — workflow, artefact, téléchargement.
 - [`docs/ESIGN.md`](docs/ESIGN.md) — signature et installation, diagnostics.
+- [`docs/ASSETS.md`](docs/ASSETS.md) — photo du héros, source et droits.
 
 ## Limites connues
 
 - L'IPA produit est **non signé** : il n'est pas installable tel quel et doit être signé avant l'installation.
 - Le rendu Liquid Glass n'a pas été vérifié visuellement sur un appareil (pas de Mac sur le poste de développement) ; il a été compilé avec le SDK iOS 26.5 et les tests passent.
 - Les horaires du vendredi soir (18:45) et les prix doivent être confirmés par l'établissement.
-- Aucune photo officielle ni logo officiel n'est embarqué : l'icône et les illustrations sont originales.
+- La photo du héros provient du site officiel B&B FACTORY ; les droits de diffusion doivent être confirmés par l'établissement avant une publication sur l'App Store. L'icône reste originale.
 - Aucune réservation, commande ou fidélité intégrée : l'app renvoie vers le téléphone et le site officiel.
 - La livraison n'est pas proposée.
 - Les allergènes ne sont pas publiés.

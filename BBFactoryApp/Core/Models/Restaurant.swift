@@ -3,7 +3,7 @@ import Foundation
 /// Root content of `Restaurant.json`.
 ///
 /// Every piece of information displayed by the app comes from this file, so the
-/// establishment details, opening hours, menu and news can be corrected without
+/// establishment details, opening hours and menu can be corrected without
 /// touching the Swift code.
 struct Restaurant: Codable, Hashable, Sendable {
     let schemaVersion: Int
@@ -16,7 +16,6 @@ struct Restaurant: Codable, Hashable, Sendable {
     let payments: [PaymentMethod]
     let story: Story
     let menu: Menu
-    let news: [NewsItem]
 
     struct Identity: Codable, Hashable, Sendable {
         let name: String
@@ -46,16 +45,9 @@ struct Restaurant: Codable, Hashable, Sendable {
         let country: String
         let latitude: Double
         let longitude: Double
-        let mapsURL: String
-        let directionsURL: String
 
         var fullAddress: String {
             "\(street), \(postalCode) \(city)"
-        }
-
-        /// A single-line address suitable for `CLGeocoder`-free map links.
-        var queryAddress: String {
-            "\(street), \(postalCode) \(city), \(country)"
         }
     }
 
@@ -126,34 +118,5 @@ struct Restaurant: Codable, Hashable, Sendable {
                     .locale(Locale(identifier: "fr_FR"))
             )
         }
-    }
-
-    struct NewsItem: Codable, Hashable, Identifiable, Sendable {
-        let id: String
-        let date: String
-        let kind: String
-        let title: String
-        let summary: String
-        let sourceName: String
-        let sourceURL: String
-
-        var dateValue: Date? {
-            Self.parser.date(from: date)
-        }
-
-        var dateText: String {
-            guard let dateValue else { return date }
-            return BBDate.frenchLong(dateValue)
-        }
-
-        var isDistinction: Bool { kind == "distinction" }
-
-        private static let parser: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.locale = Locale(identifier: "en_US_POSIX")
-            formatter.timeZone = TimeZone(identifier: "Europe/Paris")
-            formatter.dateFormat = "yyyy-MM-dd"
-            return formatter
-        }()
     }
 }

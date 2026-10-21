@@ -51,10 +51,8 @@ final class RestaurantDataTests: XCTestCase {
             restaurant.contact.website,
             restaurant.contact.orderURL,
             restaurant.contact.facebookURL,
-            restaurant.contact.instagramURL,
-            restaurant.location.mapsURL,
-            restaurant.location.directionsURL
-        ] + restaurant.news.map(\.sourceURL) + restaurant.story.distinctions.map(\.sourceURL)
+            restaurant.contact.instagramURL
+        ] + restaurant.story.distinctions.map(\.sourceURL)
 
         for value in values {
             let url = AppURL.web(value)
@@ -126,16 +124,18 @@ final class RestaurantDataTests: XCTestCase {
         XCTAssertTrue(item.priceText.contains("€"))
     }
 
-    func testNewsAreDatedAndSourced() {
-        let news = TestFixtures.restaurant.news
-        XCTAssertFalse(news.isEmpty)
-        for item in news {
-            XCTAssertNotNil(item.dateValue, "Date invalide : \(item.date)")
-            XCTAssertFalse(item.sourceName.isEmpty)
-            XCTAssertFalse(item.title.isEmpty)
-            XCTAssertFalse(item.summary.isEmpty)
-            XCTAssertNotNil(AppURL.web(item.sourceURL))
-        }
+    func testDirectionsFallbackTargetsRestaurant() throws {
+        let url = try XCTUnwrap(MapsService.fallbackURL(for: TestFixtures.restaurant))
+        let components = try XCTUnwrap(URLComponents(url: url, resolvingAgainstBaseURL: false))
+        XCTAssertEqual(components.scheme, "https")
+        XCTAssertEqual(components.host, "maps.apple.com")
+
+        let query = Dictionary(
+            uniqueKeysWithValues: (components.queryItems ?? []).map { ($0.name, $0.value ?? "") }
+        )
+        XCTAssertEqual(query["daddr"], "48.7679627,7.2589887")
+        XCTAssertEqual(query["q"], "B&B FACTORY")
+        XCTAssertEqual(query["dirflg"], "d")
     }
 
     func testEveryServiceAndPaymentSymbolExists() {

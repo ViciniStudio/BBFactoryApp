@@ -91,8 +91,7 @@ Selon la version, eSign peut proposer une signature « avec certificat local »,
 - L'onglet **Accueil** affiche l'état ouvert/fermé.
 - L'onglet **Carte** affiche les plats et les prix.
 - La fiche d'un plat s'ouvre et le favori persiste après fermeture de l'app.
-- **Pratique** ouvre Plans et le téléphone.
-- **Actus** ouvre l'article source dans Safari.
+- **Pratique** ouvre l'itinéraire directement dans Plans et permet d'appeler.
 - Le mode sombre et le mode clair restent lisibles.
 
 ## 9. Diagnostiquer

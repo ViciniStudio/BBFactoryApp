@@ -26,9 +26,7 @@
     "city": "Phalsbourg",
     "country": "France",
     "latitude": 48.7679627,
-    "longitude": 7.2589887,
-    "mapsURL": "https://maps.apple.com/?ll=48.7679627,7.2589887&q=B%26B%20FACTORY%2C%2012%20rue%20Lobau%2C%2057370%20Phalsbourg",
-    "directionsURL": "https://maps.apple.com/?daddr=12%20rue%20Lobau%2C%2057370%20Phalsbourg&ll=48.7679627,7.2589887"
+    "longitude": 7.2589887
   },
   "openingHours": {
     "timeZone": "Europe/Paris",
@@ -277,25 +275,5 @@
         "category": "enfants"
       }
     ]
-  },
-  "news": [
-    {
-      "id": "neo-terra-4e-place",
-      "date": "2026-04-01",
-      "kind": "distinction",
-      "title": "Néo Terra : 4e place à la finale régionale Nord-Est",
-      "summary": "Le burger du chef Mickaël Robert termine quatrième parmi les cinq finalistes de la zone Nord-Est de la Coupe de France du Burger, à Paris.",
-      "sourceName": "Radio Mélodie",
-      "sourceURL": "https://www.radiomelodie.com/a/flash/17628-a-phalsbourg-le-burger-de-mickael-robert-est-dans-le-top-5-france"
-    },
-    {
-      "id": "neo-terra-finaliste",
-      "date": "2026-03-31",
-      "kind": "actualite",
-      "title": "Le Néo Terra en finale régionale de la Coupe de France",
-      "summary": "Mickaël Robert présente le Néo Terra à Paris : pain brioché feuilleté aux farines anciennes, ketchup betterave-raifort, garniture végétale, gouda fumé végétal et crumble cacao-oignon-lard.",
-      "sourceName": "Le Républicain Lorrain",
-      "sourceURL": "https://www.republicain-lorrain.fr/magazine-cuisine-et-vins/2026/03/31/le-neo-terra-le-burger-de-phalsbourg-en-finale-regionale-de-la-coupe-de-france"
-    }
-  ]
+  }
 }
