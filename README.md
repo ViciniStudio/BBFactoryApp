@@ -93,7 +93,7 @@ BBFactoryApp/
 ├── Core/
 │   ├── DesignSystem/       # thème, verre, composants
 │   ├── Models/             # Restaurant, horaires
-│   ├── Services/           # chargement, favoris, URLs
+│   ├── Services/           # chargement, favoris, URLs, itinéraire
 │   └── Utilities/
 ├── Features/               # Accueil, Carte, Maison, Pratique, Contact
 ├── Resources/

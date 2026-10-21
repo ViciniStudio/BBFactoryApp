@@ -35,7 +35,6 @@ enum MapsService {
                 name: "daddr",
                 value: "\(restaurant.location.latitude),\(restaurant.location.longitude)"
             ),
-            URLQueryItem(name: "q", value: restaurant.identity.name),
             URLQueryItem(name: "dirflg", value: "d")
         ]
         return components?.url

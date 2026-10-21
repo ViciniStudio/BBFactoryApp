@@ -134,8 +134,8 @@ final class RestaurantDataTests: XCTestCase {
             uniqueKeysWithValues: (components.queryItems ?? []).map { ($0.name, $0.value ?? "") }
         )
         XCTAssertEqual(query["daddr"], "48.7679627,7.2589887")
-        XCTAssertEqual(query["q"], "B&B FACTORY")
         XCTAssertEqual(query["dirflg"], "d")
+        XCTAssertNil(query["q"], "Le repli doit viser les coordonnées, pas une recherche textuelle.")
     }
 
     func testEveryServiceAndPaymentSymbolExists() {
