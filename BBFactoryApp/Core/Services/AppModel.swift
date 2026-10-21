@@ -19,10 +19,10 @@ final class AppModel {
 
     init(
         repository: RestaurantRepository = RestaurantRepository(),
-        favorites: FavoritesStore = FavoritesStore()
+        favorites: FavoritesStore? = nil
     ) {
         self.repository = repository
-        self.favorites = favorites
+        self.favorites = favorites ?? FavoritesStore()
     }
 
     func loadIfNeeded() {
