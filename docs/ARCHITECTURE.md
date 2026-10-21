@@ -58,7 +58,7 @@ docs/
 
 - `Identity`, `Contact`, `RestaurantLocation`
 - `OpeningHours` → `[DaySchedule]` → `[ServiceWindow]`
-- `Menu` → catégories + `[MenuItem]`
+- `Menu` → catégories + `[MenuItem]` ; un plat peut préciser son service (`MenuCourse` : entrée ou plat) pour les recettes proposées en deux portions
 - `Story` → paragraphes, faits, distinctions
 - `[ServiceItem]`, `[PaymentMethod]`
 
@@ -91,7 +91,7 @@ TabView
 └── Pratique ── téléphone, itinéraire natif, copie d'adresse
 ```
 
-Les actions « La carte », « Tous les horaires » et « Pratique » changent d'onglet via un `Binding<AppTab>`, ce qui évite d'empiler des copies d'écrans.
+Les actions « La carte », « Tous les horaires » et « Pratique » changent d'onglet via un `Binding<AppTab>`, ce qui évite d'empiler des copies d'écrans. `bbTabTransition(_:selection:)` applique un léger fondu suivi d'une remontée au contenu de l'onglet qui devient actif ; il respecte `accessibilityReduceMotion`.
 
 ## 5. Données et mise à jour
 
@@ -136,7 +136,7 @@ Les tests s'exécutent via GitHub Actions sur le premier simulateur iPhone dispo
 - Projet généré par **XcodeGen** depuis `project.yml` (le `.xcodeproj` n'est pas versionné).
 - Bundle ID : `fr.vicinistudio.bbfactory`.
 - Nom affiché : `B&B Factory`.
-- Version : `1.0.0` (build `2`).
+- Version : `1.0.0` (build `3`).
 - iPhone uniquement, portrait.
 - Aucune dépendance Swift Package.
 - Signature désactivée dans le workflow pour produire un IPA non signé.

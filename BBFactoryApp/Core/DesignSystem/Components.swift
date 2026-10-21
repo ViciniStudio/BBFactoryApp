@@ -130,6 +130,27 @@ struct FilterChip: View {
     }
 }
 
+/// Marks the portion in which a dish is served, for recipes offered as a
+/// starter and as a main course.
+struct MenuCourseBadge: View {
+    let course: Restaurant.MenuCourse
+
+    var body: some View {
+        Text(course.label.uppercased())
+            .font(.caption2.weight(.bold))
+            .tracking(0.8)
+            .foregroundStyle(BBTheme.accentText)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 3)
+            .background(BBTheme.accent.opacity(0.13), in: Capsule())
+            .overlay(
+                Capsule()
+                    .stroke(BBTheme.accent.opacity(0.24), lineWidth: 0.8)
+            )
+            .accessibilityLabel("Servi en \(course.label.lowercased())")
+    }
+}
+
 struct SourceLink: View {
     let name: String
     let url: URL?

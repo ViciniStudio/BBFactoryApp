@@ -53,18 +53,22 @@ private struct MainTabView: View {
         TabView(selection: $selection) {
             Tab("Accueil", systemImage: "house", value: AppTab.home) {
                 HomeView(restaurant: restaurant, selection: $selection)
+                    .bbTabTransition(.home, selection: selection)
             }
 
             Tab("Carte", systemImage: "fork.knife", value: AppTab.menu) {
                 MenuView(restaurant: restaurant)
+                    .bbTabTransition(.menu, selection: selection)
             }
 
             Tab("Maison", systemImage: "storefront", value: AppTab.story) {
                 StoryView(restaurant: restaurant)
+                    .bbTabTransition(.story, selection: selection)
             }
 
             Tab("Pratique", systemImage: "mappin.and.ellipse", value: AppTab.practical) {
                 PracticalView(restaurant: restaurant)
+                    .bbTabTransition(.practical, selection: selection)
             }
         }
         .bbMinimizingTabBar()

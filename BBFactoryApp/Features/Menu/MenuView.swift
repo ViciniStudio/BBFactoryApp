@@ -184,6 +184,11 @@ private struct MenuRow: View {
     let onOpen: () -> Void
     let onToggleFavorite: () -> Void
 
+    private var courseAccessibilityText: String {
+        guard let course = item.course else { return "" }
+        return "Servi en \(course.label.lowercased()). "
+    }
+
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
             Button(action: onOpen) {
@@ -199,10 +204,16 @@ private struct MenuRow: View {
                             .foregroundStyle(BBTheme.accentText)
                     }
 
-                    Text(categoryTitle.uppercased())
-                        .font(.caption2.weight(.semibold))
-                        .tracking(0.7)
-                        .foregroundStyle(BBTheme.secondaryInk)
+                    HStack(spacing: 8) {
+                        Text(categoryTitle.uppercased())
+                            .font(.caption2.weight(.semibold))
+                            .tracking(0.7)
+                            .foregroundStyle(BBTheme.secondaryInk)
+
+                        if let course = item.course {
+                            MenuCourseBadge(course: course)
+                        }
+                    }
 
                     Text(item.description)
                         .font(.subheadline)
@@ -213,7 +224,7 @@ private struct MenuRow: View {
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("\(item.name), \(item.priceText). \(item.description)")
+            .accessibilityLabel("\(item.name), \(item.priceText). \(courseAccessibilityText)\(item.description)")
             .accessibilityHint("Ouvre le détail du plat")
 
             Button(action: onToggleFavorite) {

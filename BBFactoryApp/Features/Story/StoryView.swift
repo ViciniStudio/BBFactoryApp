@@ -37,24 +37,38 @@ struct StoryView: View {
 
     private var hero: some View {
         ZStack(alignment: .bottomLeading) {
-            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                .fill(
-                    LinearGradient(
-                        colors: [BBTheme.heroTop, BBTheme.heroBottom],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
+            LinearGradient(
+                colors: [BBTheme.heroTop, BBTheme.heroBottom],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
 
-            AmbientGlow()
-                .frame(width: 200, height: 200)
-                .offset(x: 130, y: -50)
-
-            Image(systemName: "flame")
-                .font(.system(size: 92, weight: .ultraLight))
-                .foregroundStyle(BBTheme.copper.opacity(0.35))
-                .offset(x: 225, y: -75)
+            Image("StoryKitchen")
+                .resizable()
+                .scaledToFill()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .clipped()
                 .accessibilityHidden(true)
+
+            LinearGradient(
+                stops: [
+                    .init(color: .black.opacity(0.68), location: 0),
+                    .init(color: .black.opacity(0.28), location: 0.48),
+                    .init(color: .clear, location: 0.82)
+                ],
+                startPoint: .leading,
+                endPoint: .trailing
+            )
+
+            LinearGradient(
+                stops: [
+                    .init(color: .clear, location: 0.28),
+                    .init(color: .black.opacity(0.52), location: 0.68),
+                    .init(color: .black.opacity(0.9), location: 1)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
 
             VStack(alignment: .leading, spacing: 9) {
                 Text("PHALSBOURG · DEPUIS \(String(restaurant.identity.since))")

@@ -105,12 +105,27 @@ struct Restaurant: Codable, Hashable, Sendable {
         let title: String
     }
 
+    /// Portion in which a dish is served. Only set when the menu offers the same
+    /// recipe in several sizes, such as the salads available as a starter or a main.
+    enum MenuCourse: String, Codable, Hashable, Sendable {
+        case starter = "entree"
+        case main = "plat"
+
+        var label: String {
+            switch self {
+            case .starter: "Entrée"
+            case .main: "Plat"
+            }
+        }
+    }
+
     struct MenuItem: Codable, Hashable, Identifiable, Sendable {
         let id: String
         let name: String
         let description: String
         let price: Double
         let category: String
+        let course: MenuCourse?
 
         var priceText: String {
             price.formatted(

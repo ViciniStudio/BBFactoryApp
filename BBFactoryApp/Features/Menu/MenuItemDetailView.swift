@@ -55,9 +55,15 @@ struct MenuItemDetailView: View {
                 .foregroundStyle(BBTheme.ink)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Text(item.priceText)
-                .font(.title3.weight(.bold))
-                .foregroundStyle(BBTheme.accentText)
+            HStack(spacing: 10) {
+                Text(item.priceText)
+                    .font(.title3.weight(.bold))
+                    .foregroundStyle(BBTheme.accentText)
+
+                if let course = item.course {
+                    MenuCourseBadge(course: course)
+                }
+            }
         }
     }
 

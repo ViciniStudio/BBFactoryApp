@@ -112,13 +112,36 @@ final class RestaurantDataTests: XCTestCase {
         XCTAssertTrue(menu.items.contains { $0.id == "menu-enfant" })
     }
 
+    func testSaladCoursesMatchStarterAndMainPortions() {
+        let menu = TestFixtures.restaurant.menu
+        let expected: [String: Restaurant.MenuCourse] = [
+            "tomates-buffala-entree": .starter,
+            "tomates-buffala-plat": .main,
+            "cesar-entree": .starter,
+            "cesar-plat": .main
+        ]
+
+        for (id, course) in expected {
+            let item = menu.items.first { $0.id == id }
+            XCTAssertEqual(item?.course, course, "Service manquant ou incorrect pour \(id)")
+        }
+
+        XCTAssertEqual(Restaurant.MenuCourse.starter.label, "Entrée")
+        XCTAssertEqual(Restaurant.MenuCourse.main.label, "Plat")
+        XCTAssertTrue(
+            menu.items.filter { $0.course != nil }.allSatisfy { $0.category == "salades" },
+            "Seules les salades proposent une portion entrée ou plat."
+        )
+    }
+
     func testPriceFormattingUsesFrenchLocale() {
         let item = Restaurant.MenuItem(
             id: "test",
             name: "Test",
             description: "Test",
             price: 11.9,
-            category: "burgers"
+            category: "burgers",
+            course: nil
         )
         XCTAssertTrue(item.priceText.contains("11,90"))
         XCTAssertTrue(item.priceText.contains("€"))

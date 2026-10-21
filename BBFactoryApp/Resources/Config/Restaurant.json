@@ -181,28 +181,32 @@
         "name": "Tomates & Buffala",
         "description": "Trio de tomates colorées, mozzarella di Buffala, pesto, crème de balsamique. En entrée.",
         "price": 9.00,
-        "category": "salades"
+        "category": "salades",
+        "course": "entree"
       },
       {
         "id": "tomates-buffala-plat",
         "name": "Tomates & Buffala",
         "description": "Trio de tomates colorées, mozzarella di Buffala, pesto, crème de balsamique. En plat.",
         "price": 15.00,
-        "category": "salades"
+        "category": "salades",
+        "course": "plat"
       },
       {
         "id": "cesar-entree",
         "name": "La César",
         "description": "Jeunes pousses, filet de poulet pané, tomates confites, copeaux de parmesan, oignons frits, œuf de caille, sauce césar, vinaigrette. En entrée.",
         "price": 9.00,
-        "category": "salades"
+        "category": "salades",
+        "course": "entree"
       },
       {
         "id": "cesar-plat",
         "name": "La César",
         "description": "Jeunes pousses, filet de poulet pané, tomates confites, copeaux de parmesan, oignons frits, œuf de caille, sauce césar, vinaigrette. En plat.",
         "price": 15.00,
-        "category": "salades"
+        "category": "salades",
+        "course": "plat"
       },
       {
         "id": "le-cheese",
