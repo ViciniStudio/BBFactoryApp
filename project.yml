@@ -45,6 +45,7 @@ targets:
       base:
         PRODUCT_NAME: BBFactoryApp
         PRODUCT_BUNDLE_IDENTIFIER: fr.vicinistudio.bbfactory
+        TARGETED_DEVICE_FAMILY: "1"
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: "B&B Factory"
         INFOPLIST_KEY_CFBundleName: "BB Factory"
