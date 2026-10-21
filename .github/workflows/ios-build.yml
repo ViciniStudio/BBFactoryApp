@@ -26,20 +26,26 @@ env:
 jobs:
   build:
     name: Build, test and package unsigned IPA
-    runs-on: macos-26
+    # macOS 26 runners are regularly saturated. The macOS 15 image ships
+    # Xcode 26.x (26.3 at the time of writing), which contains the iOS 26 SDK
+    # needed by the Liquid Glass APIs, so the build stays on a stable pool.
+    runs-on: macos-15
     timeout-minutes: 45
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
 
-      - name: Select Xcode 26.6
+      - name: Select the newest Xcode 26
         run: |
-          if [ -d /Applications/Xcode_26.6.app ]; then
-            sudo xcode-select -s /Applications/Xcode_26.6.app
-          else
-            echo "Xcode 26.6 is not installed on this image; using the default Xcode."
+          set -euo pipefail
+          XCODE_APP=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -n1)
+          if [ -z "$XCODE_APP" ]; then
+            echo "::error::Xcode 26 is required to build the iOS 26 Liquid Glass APIs."
+            exit 1
           fi
+          echo "Selected $XCODE_APP"
+          sudo xcode-select -s "$XCODE_APP"
           xcodebuild -version
 
       - name: Show toolchain versions
