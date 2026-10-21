@@ -10,16 +10,16 @@ Le workflow ne contient aucun certificat, aucun mot de passe et aucun secret App
 
 | Champ | Valeur |
 | --- | --- |
-| Exécution | [#10 — 39616496509](https://github.com/ViciniStudio/BBFactoryApp/actions/runs/39616496509) |
-| Commit | `28a8e5e` |
+| Exécution | [#11 — 39629687552](https://github.com/ViciniStudio/BBFactoryApp/actions/runs/39629687552) |
+| Commit | `eb961fc` |
 | Artefact | `BBFactoryApp-Unsigned-IPA` |
-| Fichier | `BBFactoryApp-1.0.0-10-unsigned.ipa` |
-| Taille | 1 181 640 octets |
-| SHA-256 | `15a3cbdaf8a90c183194ac0ad0e88b1c7884bb313031776a9f17dab129dcb9e6` |
+| Fichier | `BBFactoryApp-1.0.0-11-unsigned.ipa` |
+| Taille | 1 178 300 octets |
+| SHA-256 | `056e81696b70bdabc171d06bc66df63ca889dc5ac0d6070d03a27decab9cfbf4` |
 | Tests | 33 exécutés, 0 échec |
 | Toolchain | Xcode 26.3, Swift 6.2.4, SDK iOS 26.2 |
 
-L'IPA a été retéléchargé depuis l'artefact puis contrôlé : `Payload/BBFactoryApp.app` contient le binaire arm64, `Info.plist` (build 3, minimum iOS 18.0), `Restaurant.json`, `PrivacyInfo.xcprivacy` ; `Assets.car` contient `HeroBurger` et `StoryKitchen`. Aucun `embedded.mobileprovision` ni dossier `_CodeSignature` n'est présent. Le hash recalculé correspond à celui du workflow.
+L'IPA a été retéléchargé depuis l'artefact puis contrôlé : `Payload/BBFactoryApp.app` contient le binaire arm64, `Info.plist` (build 4, minimum iOS 18.0), `Restaurant.json`, `PrivacyInfo.xcprivacy` ; `Assets.car` contient `HeroBurger` et `StoryKitchen`. Aucun `embedded.mobileprovision` ni dossier `_CodeSignature` n'est présent. Le hash recalculé correspond à celui du workflow.
 
 Le numéro d'exécution augmente à chaque push et apparaît dans le nom de l'IPA ; `CFBundleVersion`, lui, reste défini dans `project.yml`.
 

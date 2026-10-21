@@ -136,7 +136,7 @@ Les tests s'exécutent via GitHub Actions sur le premier simulateur iPhone dispo
 - Projet généré par **XcodeGen** depuis `project.yml` (le `.xcodeproj` n'est pas versionné).
 - Bundle ID : `fr.vicinistudio.bbfactory`.
 - Nom affiché : `B&B Factory`.
-- Version : `1.0.0` (build `3`).
+- Version : `1.0.0` (build `4`).
 - iPhone uniquement, portrait.
 - Aucune dépendance Swift Package.
 - Signature désactivée dans le workflow pour produire un IPA non signé.
