@@ -1,0 +1,301 @@
+{
+  "schemaVersion": 1,
+  "lastVerified": "2026-10-21",
+  "identity": {
+    "name": "B&B FACTORY",
+    "shortName": "B&B",
+    "tagline": "Burgers de caractère au cœur de Phalsbourg",
+    "description": "Restaurant de burgers haut de gamme à Phalsbourg. Recettes travaillées, pain boulanger bio, sauces maison. Sur place, en terrasse, à emporter ou en click & collect.",
+    "cuisine": "Burgers",
+    "since": 2024,
+    "chef": "Mickaël Robert",
+    "manager": "Benjamin Robert"
+  },
+  "contact": {
+    "phone": "+33387037168",
+    "phoneDisplay": "03 87 03 71 68",
+    "email": "b.burgerfactory@gmail.com",
+    "website": "https://bb-factory.metro.rest/?lang=fr",
+    "orderURL": "https://burger-factory-phalsbourg.order.dish.co/menus",
+    "facebookURL": "https://www.facebook.com/profile.php?id=61557945516073",
+    "instagramURL": "https://www.instagram.com/b.burger_factory"
+  },
+  "location": {
+    "street": "12 rue Lobau",
+    "postalCode": "57370",
+    "city": "Phalsbourg",
+    "country": "France",
+    "latitude": 48.7679627,
+    "longitude": 7.2589887,
+    "mapsURL": "https://maps.apple.com/?ll=48.7679627,7.2589887&q=B%26B%20FACTORY%2C%2012%20rue%20Lobau%2C%2057370%20Phalsbourg",
+    "directionsURL": "https://maps.apple.com/?daddr=12%20rue%20Lobau%2C%2057370%20Phalsbourg&ll=48.7679627,7.2589887"
+  },
+  "openingHours": {
+    "timeZone": "Europe/Paris",
+    "note": "Service midi et soir. Fermé le jeudi. Horaires susceptibles d’être modifiés les jours fériés et pendant les congés.",
+    "days": [
+      {
+        "weekday": "monday",
+        "services": [
+          { "opens": "11:45", "closes": "13:45" },
+          { "opens": "18:30", "closes": "21:00" }
+        ]
+      },
+      {
+        "weekday": "tuesday",
+        "services": [
+          { "opens": "11:45", "closes": "13:45" },
+          { "opens": "18:30", "closes": "21:00" }
+        ]
+      },
+      {
+        "weekday": "wednesday",
+        "services": [
+          { "opens": "11:45", "closes": "13:45" },
+          { "opens": "18:30", "closes": "21:00" }
+        ]
+      },
+      { "weekday": "thursday", "services": [] },
+      {
+        "weekday": "friday",
+        "services": [
+          { "opens": "11:45", "closes": "13:45" },
+          { "opens": "18:45", "closes": "21:00" }
+        ]
+      },
+      {
+        "weekday": "saturday",
+        "services": [
+          { "opens": "11:45", "closes": "13:45" },
+          { "opens": "18:30", "closes": "21:00" }
+        ]
+      },
+      {
+        "weekday": "sunday",
+        "services": [
+          { "opens": "18:00", "closes": "21:00" }
+        ]
+      }
+    ]
+  },
+  "services": [
+    { "id": "pmr", "title": "Accès PMR", "symbol": "figure.roll", "detail": "Établissement accessible aux personnes à mobilité réduite." },
+    { "id": "terrasse", "title": "Terrasse", "symbol": "sun.max", "detail": "Service en terrasse." },
+    { "id": "parking", "title": "Parking", "symbol": "parkingsign.circle", "detail": "Parking en libre-service." },
+    { "id": "evenements", "title": "Événements privés", "symbol": "party.popper", "detail": "Privatisation pour vos événements." },
+    { "id": "fumeurs", "title": "Coin fumeurs", "symbol": "smoke", "detail": "Espace fumeurs dédié." },
+    { "id": "emporter", "title": "À emporter", "symbol": "takeoutbag.and.cup.and.straw", "detail": "Commande à emporter et click & collect." },
+    { "id": "mariages", "title": "Réceptions", "symbol": "heart", "detail": "Réceptions de mariage sur demande." },
+    { "id": "wifi", "title": "Wi-Fi gratuit", "symbol": "wifi", "detail": "Connexion Wi-Fi gratuite sur place." }
+  ],
+  "payments": [
+    { "id": "especes", "title": "Espèces", "symbol": "banknote" },
+    { "id": "sans-contact", "title": "Sans contact", "symbol": "wave.3.right.circle" },
+    { "id": "mastercard", "title": "MasterCard", "symbol": "creditcard" },
+    { "id": "visa", "title": "VISA", "symbol": "creditcard" },
+    { "id": "debit", "title": "Carte de débit", "symbol": "creditcard" },
+    { "id": "apple-pay", "title": "Apple Pay", "symbol": "apple.logo" }
+  ],
+  "story": {
+    "headline": "Une maison, un chef, des burgers travaillés",
+    "paragraphs": [
+      "B&B FACTORY ouvre en 2024 au 12 rue Lobau, au cœur de Phalsbourg. La maison est portée par Benjamin Robert, gérant, et par le chef Mickaël Robert.",
+      "Le chef a construit son parcours en cuisine après quinze années passées dans l’armée. Il a terminé quatrième du concours du Meilleur Apprenti de France et participé à l’émission Objectif TopChef.",
+      "La carte assume le burger comme un plat à part entière : pain boulanger bio, viande Black Angus, fromages travaillés et sauces maison. En 2026, le chef Mickaël Robert a défendu le Néo Terra lors de la Coupe de France du Burger."
+    ],
+    "facts": [
+      { "label": "Ouverture", "value": "2024" },
+      { "label": "Chef", "value": "Mickaël Robert" },
+      { "label": "Gérant", "value": "Benjamin Robert" },
+      { "label": "Spécialité", "value": "Burgers" }
+    ],
+    "distinctions": [
+      {
+        "id": "coupe-france-2026",
+        "title": "4e — Coupe de France du Burger 2026",
+        "detail": "Finale régionale Nord-Est, à Paris, avec le burger Néo Terra.",
+        "sourceName": "Radio Mélodie",
+        "sourceURL": "https://www.radiomelodie.com/a/flash/17628-a-phalsbourg-le-burger-de-mickael-robert-est-dans-le-top-5-france"
+      },
+      {
+        "id": "meilleur-apprenti",
+        "title": "4e — Meilleur Apprenti de France",
+        "detail": "Parcours du chef Mickaël Robert, tel que présenté par la maison.",
+        "sourceName": "Site officiel B&B FACTORY",
+        "sourceURL": "https://bb-factory.metro.rest/?lang=fr"
+      },
+      {
+        "id": "objectif-topchef",
+        "title": "Participant — Objectif TopChef",
+        "detail": "Participation du chef à l’émission, mentionnée par l’établissement.",
+        "sourceName": "Office de tourisme du Pays de Phalsbourg",
+        "sourceURL": "https://www.cirkwi.com/fr/point-interet/3381796-restaurant-b-b-factory"
+      },
+      {
+        "id": "restaurant-guru-2026",
+        "title": "Meilleurs burgers 2026",
+        "detail": "Distinction Restaurant Guru affichée par l’établissement.",
+        "sourceName": "Restaurant Guru",
+        "sourceURL": "https://fr.restaurantguru.com/BandB-FACTORY-Phalsbourg"
+      }
+    ]
+  },
+  "menu": {
+    "currency": "EUR",
+    "note": "Carte publiée en ligne par l’établissement. Les prix peuvent évoluer ; seuls les prix affichés en salle font foi.",
+    "categories": [
+      { "id": "entrees", "title": "Entrées" },
+      { "id": "salades", "title": "Salades" },
+      { "id": "burgers", "title": "Burgers" },
+      { "id": "enfants", "title": "Menu enfant" }
+    ],
+    "items": [
+      {
+        "id": "tenders",
+        "name": "Tenders",
+        "description": "5 pièces de tenders de poulet + 1 sauce au choix.",
+        "price": 7.90,
+        "category": "entrees"
+      },
+      {
+        "id": "mozza-stick",
+        "name": "Mozza Stick",
+        "description": "6 pièces de mozza sticks + 1 sauce au choix.",
+        "price": 5.90,
+        "category": "entrees"
+      },
+      {
+        "id": "onion-rings",
+        "name": "Onion Rings",
+        "description": "8 pièces d’onion rings + 1 sauce au choix.",
+        "price": 5.90,
+        "category": "entrees"
+      },
+      {
+        "id": "mix-tapas",
+        "name": "Mix Tapas",
+        "description": "Tenders x4, mozza sticks x4, onion rings x4 + 2 sauces au choix.",
+        "price": 12.90,
+        "category": "entrees"
+      },
+      {
+        "id": "tomates-buffala-entree",
+        "name": "Tomates & Buffala",
+        "description": "Trio de tomates colorées, mozzarella di Buffala, pesto, crème de balsamique. En entrée.",
+        "price": 9.00,
+        "category": "salades"
+      },
+      {
+        "id": "tomates-buffala-plat",
+        "name": "Tomates & Buffala",
+        "description": "Trio de tomates colorées, mozzarella di Buffala, pesto, crème de balsamique. En plat.",
+        "price": 15.00,
+        "category": "salades"
+      },
+      {
+        "id": "cesar-entree",
+        "name": "La César",
+        "description": "Jeunes pousses, filet de poulet pané, tomates confites, copeaux de parmesan, oignons frits, œuf de caille, sauce césar, vinaigrette. En entrée.",
+        "price": 9.00,
+        "category": "salades"
+      },
+      {
+        "id": "cesar-plat",
+        "name": "La César",
+        "description": "Jeunes pousses, filet de poulet pané, tomates confites, copeaux de parmesan, oignons frits, œuf de caille, sauce césar, vinaigrette. En plat.",
+        "price": 15.00,
+        "category": "salades"
+      },
+      {
+        "id": "le-cheese",
+        "name": "Le Cheese",
+        "description": "Pain boulanger bio, salade, tomate, oignon rouge, steak haché Black Angus 150 g, cheddar, cornichons, sauce Mayochup. Servi avec frites et une sauce au choix.",
+        "price": 11.90,
+        "category": "burgers"
+      },
+      {
+        "id": "le-3-poivres",
+        "name": "Le 3 Poivres",
+        "description": "Pain boulanger bio, salade, tomate, oignon rouge, steak haché Black Angus 150 g, double cheddar, cornichons, sauce fumée aux 3 poivres. Servi avec frites et une sauce au choix.",
+        "price": 13.90,
+        "category": "burgers"
+      },
+      {
+        "id": "le-fish",
+        "name": "Le Fish",
+        "description": "Pain boulanger bio, salade, tomate, oignon rouge, filet de colin pané, cheddar, salicornes, sauce tartare/citron vert. Servi avec frites et une sauce au choix.",
+        "price": 14.90,
+        "category": "burgers"
+      },
+      {
+        "id": "le-caliente",
+        "name": "Le Caliente",
+        "description": "Pain boulanger bio, salade, tomate, oignon rouge, steak haché Black Angus 150 g, double cheddar, piments jalapeños, sauce pimentos. Servi avec frites et une sauce au choix.",
+        "price": 14.90,
+        "category": "burgers"
+      },
+      {
+        "id": "le-cesar",
+        "name": "Le César",
+        "description": "Pain boulanger bio, salade, tomates confites, oignon rouge, filet de poulet pané, copeaux de parmesan, sauce césar. Servi avec frites et une sauce au choix.",
+        "price": 15.90,
+        "category": "burgers"
+      },
+      {
+        "id": "le-chevre-miel",
+        "name": "Le Chèvre Miel",
+        "description": "Pain boulanger bio, salade, tomate, oignon rouge, oignon crispy, steak haché Black Angus 150 g, chèvre frais, miel, cornichons, sauce moutarde/miel. Servi avec frites et une sauce au choix.",
+        "price": 15.90,
+        "category": "burgers"
+      },
+      {
+        "id": "l-alsacien",
+        "name": "L’Alsacien",
+        "description": "Pain boulanger bio, salade, tomate, oignon rouge, steak haché Black Angus 150 g, munster, lard, cornichons, sauce moutarde à l’ancienne. Servi avec frites et une sauce au choix.",
+        "price": 16.90,
+        "category": "burgers"
+      },
+      {
+        "id": "le-rossini",
+        "name": "Le Rossini",
+        "description": "Pain boulanger bio, salade, tomate, oignon rouge, steak haché Black Angus 150 g, foie gras poêlé, sauce mayonnaise à la figue. Servi avec frites et une sauce au choix.",
+        "price": 20.90,
+        "category": "burgers"
+      },
+      {
+        "id": "l-or-noir",
+        "name": "L’Or Noir",
+        "description": "Pain boulanger bio, salade, tomate, oignon rouge, steak haché Black Angus 150 g, fromage truffé, lamelles de truffe, sauce à la truffe. Servi avec frites et une sauce au choix.",
+        "price": 24.90,
+        "category": "burgers"
+      },
+      {
+        "id": "menu-enfant",
+        "name": "Menu enfant",
+        "description": "Jusqu’à 10 ans. Croq’junior + frites, sirop à l’eau, compote ou glace selon disponibilité.",
+        "price": 7.50,
+        "category": "enfants"
+      }
+    ]
+  },
+  "news": [
+    {
+      "id": "neo-terra-4e-place",
+      "date": "2026-04-01",
+      "kind": "distinction",
+      "title": "Néo Terra : 4e place à la finale régionale Nord-Est",
+      "summary": "Le burger du chef Mickaël Robert termine quatrième parmi les cinq finalistes de la zone Nord-Est de la Coupe de France du Burger, à Paris.",
+      "sourceName": "Radio Mélodie",
+      "sourceURL": "https://www.radiomelodie.com/a/flash/17628-a-phalsbourg-le-burger-de-mickael-robert-est-dans-le-top-5-france"
+    },
+    {
+      "id": "neo-terra-finaliste",
+      "date": "2026-03-31",
+      "kind": "actualite",
+      "title": "Le Néo Terra en finale régionale de la Coupe de France",
+      "summary": "Mickaël Robert présente le Néo Terra à Paris : pain brioché feuilleté aux farines anciennes, ketchup betterave-raifort, garniture végétale, gouda fumé végétal et crumble cacao-oignon-lard.",
+      "sourceName": "Le Républicain Lorrain",
+      "sourceURL": "https://www.republicain-lorrain.fr/magazine-cuisine-et-vins/2026/03/31/le-neo-terra-le-burger-de-phalsbourg-en-finale-regionale-de-la-coupe-de-france"
+    }
+  ]
+}

@@ -1,0 +1,265 @@
+name: iOS Build — Unsigned IPA
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Least privilege: the workflow only reads the repository.
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PROJECT: BBFactoryApp.xcodeproj
+  SCHEME: BBFactoryApp
+  APP_NAME: BBFactoryApp
+  BUNDLE_ID: fr.vicinistudio.bbfactory
+
+jobs:
+  build:
+    name: Build, test and package unsigned IPA
+    runs-on: macos-26
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Select Xcode 26.6
+        run: |
+          if [ -d /Applications/Xcode_26.6.app ]; then
+            sudo xcode-select -s /Applications/Xcode_26.6.app
+          else
+            echo "Xcode 26.6 is not installed on this image; using the default Xcode."
+          fi
+          xcodebuild -version
+
+      - name: Show toolchain versions
+        run: |
+          echo "### Toolchain" >> "$GITHUB_STEP_SUMMARY"
+          sw_vers | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          xcodebuild -version | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          xcrun swift --version | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          xcodebuild -showsdks | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Install XcodeGen
+        run: |
+          brew install xcodegen
+          xcodegen --version
+
+      - name: Generate Xcode project
+        run: |
+          xcodegen generate --spec project.yml
+          test -d "$PROJECT"
+
+      - name: List schemes and targets
+        run: |
+          xcodebuild -list -project "$PROJECT" | tee xcodebuild-list.log
+
+      - name: Resolve Swift Package dependencies
+        run: |
+          xcodebuild -resolvePackageDependencies -project "$PROJECT" -scheme "$SCHEME"
+
+      - name: Build for iOS Simulator (compile check)
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -project "$PROJECT" \
+            -scheme "$SCHEME" \
+            -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            | tee build-simulator.log
+
+      - name: Run unit tests on an available iPhone simulator
+        run: |
+          set -euo pipefail
+          SIMULATOR_UDID=$(xcrun simctl list devices available | grep -m1 "iPhone" | grep -oE '[0-9A-F-]{36}' | head -n1)
+          if [ -z "$SIMULATOR_UDID" ]; then
+            echo "::error::No available iPhone simulator was found on this runner."
+            exit 1
+          fi
+          echo "Selected simulator: $SIMULATOR_UDID"
+          xcodebuild test \
+            -project "$PROJECT" \
+            -scheme "$SCHEME" \
+            -destination "platform=iOS Simulator,id=$SIMULATOR_UDID" \
+            -derivedDataPath build/DerivedData \
+            -resultBundlePath build/TestResults.xcresult \
+            CODE_SIGNING_ALLOWED=NO \
+            | tee build-tests.log
+
+      - name: Build for a real iOS device (unsigned)
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -project "$PROJECT" \
+            -scheme "$SCHEME" \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            | tee build-device.log
+
+      - name: Verify device build and package unsigned IPA
+        id: package
+        run: |
+          set -euo pipefail
+
+          APP_PATH="build/DerivedData/Build/Products/Release-iphoneos/${APP_NAME}.app"
+          BINARY="${APP_PATH}/${APP_NAME}"
+
+          if [ ! -d "$APP_PATH" ]; then
+            echo "::error::Device build produced no .app at $APP_PATH"
+            exit 1
+          fi
+          if [ ! -f "$BINARY" ]; then
+            echo "::error::Missing app binary at $BINARY"
+            exit 1
+          fi
+
+          echo "— App bundle —"
+          file "$BINARY"
+          lipo -info "$BINARY"
+          plutil -p "$APP_PATH/Info.plist"
+
+          # Guard against accidentally shipping a simulator build.
+          if ! vtool -show-build "$BINARY" | tee vtool.log | grep -q "platform IOS"; then
+            echo "::error::The binary is not built for the iOS platform (simulator build?)."
+            cat vtool.log
+            exit 1
+          fi
+
+          BUILT_BUNDLE_ID=$(plutil -extract CFBundleIdentifier raw "$APP_PATH/Info.plist")
+          if [ "$BUILT_BUNDLE_ID" != "$BUNDLE_ID" ]; then
+            echo "::error::Unexpected bundle identifier: $BUILT_BUNDLE_ID (expected $BUNDLE_ID)"
+            exit 1
+          fi
+
+          MIN_OS=$(plutil -extract MinimumOSVersion raw "$APP_PATH/Info.plist")
+          echo "MinimumOSVersion: $MIN_OS"
+
+          # The app must not be signed: eSign will sign it later.
+          if codesign -dv "$APP_PATH" >/dev/null 2>&1; then
+            echo "::warning::The .app already carries a code signature. It will still be packaged, but this workflow is meant to produce an unsigned IPA."
+          else
+            echo "Confirmed: the app is not code signed."
+          fi
+
+          VERSION=$(plutil -extract CFBundleShortVersionString raw "$APP_PATH/Info.plist")
+          BUILD_NUMBER=$(plutil -extract CFBundleVersion raw "$APP_PATH/Info.plist")
+          IPA_NAME="${APP_NAME}-${VERSION}-${GITHUB_RUN_NUMBER}-unsigned.ipa"
+
+          rm -rf build/Payload build/ipa
+          mkdir -p build/Payload build/ipa
+          cp -R "$APP_PATH" build/Payload/
+          (cd build && zip -qry "ipa/${IPA_NAME}" Payload)
+
+          IPA_PATH="build/ipa/${IPA_NAME}"
+          test -f "$IPA_PATH"
+
+          echo "— IPA archive —"
+          unzip -l "$IPA_PATH"
+          unzip -t "$IPA_PATH"
+
+          # Verify the archive structure by extracting it again.
+          rm -rf build/verify
+          mkdir -p build/verify
+          (cd build/verify && unzip -q "../ipa/${IPA_NAME}")
+
+          test -d "build/verify/Payload/${APP_NAME}.app"
+          test -f "build/verify/Payload/${APP_NAME}.app/${APP_NAME}"
+          test -f "build/verify/Payload/${APP_NAME}.app/Info.plist"
+          if [ -e "build/verify/Payload/${APP_NAME}.app/${APP_NAME}.mobileprovision" ]; then
+            echo "::error::Unexpected embedded provisioning profile in an unsigned IPA."
+            exit 1
+          fi
+
+          IPA_BUNDLE_ID=$(plutil -extract CFBundleIdentifier raw "build/verify/Payload/${APP_NAME}.app/Info.plist")
+          test "$IPA_BUNDLE_ID" = "$BUNDLE_ID"
+
+          if ! vtool -show-build "build/verify/Payload/${APP_NAME}.app/${APP_NAME}" | grep -q "platform IOS"; then
+            echo "::error::The IPA contains a non-iOS binary."
+            exit 1
+          fi
+
+          SHA256=$(shasum -a 256 "$IPA_PATH" | awk '{print $1}')
+          SIZE=$(du -h "$IPA_PATH" | awk '{print $1}')
+
+          {
+            echo "IPA_PATH=$IPA_PATH"
+            echo "IPA_NAME=$IPA_NAME"
+            echo "APP_VERSION=$VERSION"
+            echo "APP_BUILD=$BUILD_NUMBER"
+            echo "MIN_OS=$MIN_OS"
+            echo "IPA_SHA256=$SHA256"
+            echo "IPA_SIZE=$SIZE"
+          } >> "$GITHUB_ENV"
+
+          {
+            echo "### Build result"
+            echo ""
+            echo "| Field | Value |"
+            echo "| --- | --- |"
+            echo "| Commit | \`${GITHUB_SHA}\` |"
+            echo "| Version | ${VERSION} (${BUILD_NUMBER}) |"
+            echo "| Minimum iOS | ${MIN_OS} |"
+            echo "| Bundle ID | \`${BUNDLE_ID}\` |"
+            echo "| IPA | \`${IPA_NAME}\` |"
+            echo "| Size | ${SIZE} |"
+            echo "| SHA-256 | \`${SHA256}\` |"
+            echo "| Signature | **Unsigned** — must be signed with eSign before installation |"
+            echo ""
+            echo "> An unsigned IPA is not installable as-is on an iPhone."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload unsigned IPA
+        uses: actions/upload-artifact@v7
+        with:
+          name: BBFactoryApp-Unsigned-IPA
+          path: build/ipa/*.ipa
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
+
+      - name: Upload logs and test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: BBFactoryApp-Build-Logs
+          path: |
+            xcodebuild-list.log
+            build-simulator.log
+            build-tests.log
+            build-device.log
+            vtool.log
+            build/TestResults.xcresult
+          if-no-files-found: warn
+          retention-days: 7
+          compression-level: 6
+
+      - name: Build failed — read the summary
+        if: failure()
+        run: |
+          {
+            echo "### Build failed"
+            echo ""
+            echo "The workflow stopped at the first failing step. Check the **Build, test and package unsigned IPA** job logs."
+            echo ""
+            echo "Download the **BBFactoryApp-Build-Logs** artifact for the full xcodebuild output and test results."
+          } >> "$GITHUB_STEP_SUMMARY"
