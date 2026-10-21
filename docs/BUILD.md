@@ -83,7 +83,7 @@ Le workflow `.github/workflows/ios-build.yml` :
 
 1. checkout du dépôt ;
 2. affichage de macOS, Xcode, Swift et des SDK ;
-3. sélection de Xcode 26.6 (si présent sur l'image) ;
+3. sélection du plus récent Xcode 26 installé sur l'image ;
 4. installation de XcodeGen ;
 5. génération du projet ;
 6. liste des schemes ;
@@ -98,13 +98,15 @@ Le workflow `.github/workflows/ios-build.yml` :
 
 Déclencheurs : push sur `main`, pull request vers `main`, exécution manuelle.
 
-## 6. Pourquoi `macos-26` et Xcode 26.6
+## 6. Pourquoi `macos-15-intel` et Xcode 26.3
 
-L'image `macos-26` de GitHub Actions fournit, au moment de la rédaction, Xcode 26.6 (SDK iOS 26.5) et des simulateurs iPhone récents. C'est la version nécessaire pour compiler les API Liquid Glass tout en conservant un déploiement iOS 18.
+L'image `macos-15-intel` de GitHub Actions fournit Xcode 26.3 (SDK iOS 26.2) et des simulateurs iPhone récents. C'est suffisant pour compiler les API Liquid Glass tout en conservant un déploiement iOS 18.
 
-Lors de l'exécution vérifiée du 21/10/2026 : Xcode 26.6 (17F113), Swift 6.3.3, SDK `iPhoneOS26.5`, 32 tests réussis.
+GitHub signale des contraintes de capacité sur ses runners macOS arm64 : trois exécutions ont été annulées après quinze minutes d'attente sans qu'un runner soit attribué. Le workflow utilise donc le runner Intel, disponible, dont le binaire de sortie reste bien `arm64` pour l'iPhone. Il pourra repasser sur `macos-26` lorsque la file arm64 sera revenue à la normale.
 
-Le workflow tente de sélectionner Xcode 26.6, puis retombe sur le Xcode par défaut de l'image s'il est absent. Il choisit ensuite automatiquement un simulateur iPhone disponible pour les tests et imprime les versions réelles à chaque exécution ; il ne suppose pas silencieusement une version.
+Lors de l'exécution vérifiée du 21/10/2026 : Xcode 26.3, Swift 6.2.4, SDK `iPhoneOS26.2`, 33 tests réussis.
+
+Le workflow sélectionne le plus récent Xcode 26 installé sur l'image et échoue explicitement si aucun n'est présent, plutôt que de compiler avec un SDK trop ancien. Il choisit ensuite automatiquement un simulateur iPhone disponible pour les tests et imprime les versions réelles à chaque exécution.
 
 ## 7. Vérifications réalisées sous Windows
 

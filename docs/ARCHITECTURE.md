@@ -124,7 +124,7 @@ Aucune migration de base de données n'est nécessaire.
 | Fichier | Couverture |
 | --- | --- |
 | `OpeningHoursTests` | ouvert/fermé, midi/soir, jeudi, dimanche, vendredi 18:45, fermeture exclusive, lendemain |
-| `RestaurantDataTests` | identité, adresse, URLs HTTPS, téléphone/e-mail, itinéraire de repli, intégrité de la carte, symboles SF, dates, resource manquante |
+| `RestaurantDataTests` | identité, adresse, URLs HTTPS, téléphone/e-mail, itinéraire de repli, intégrité de la carte, portions entrée/plat des salades, symboles SF, dates, resource manquante |
 | `FavoritesStoreTests` | ajout/retrait, persistance, purge |
 | `AppModelTests` | chargement, erreur, idempotence |
 | `MenuFilteringTests` | catégories, appartenance, prix, recherche |

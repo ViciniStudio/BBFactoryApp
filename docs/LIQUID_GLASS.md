@@ -29,7 +29,7 @@ func glassEffect(_ glass: Glass = .regular,
 
 | Élément | Choix |
 | --- | --- |
-| SDK de compilation | iOS 26.5 (Xcode 26.6, runner `macos-26`) |
+| SDK de compilation | iOS 26.2 (Xcode 26.3, runner `macos-15-intel`) |
 | Déploiement minimum | **iOS 18.0** |
 | Liquid Glass natif | iOS 26 et ultérieur |
 | Repli | matériau translucide + trait fin sur iOS 18 |
@@ -87,7 +87,7 @@ Cette hiérarchie évite l'écueil « tout est flou » : le contenu reste stable
 
 ## 8. Limites de vérification
 
-Le projet est développé depuis Windows 11. Aucun simulateur iOS n'est disponible localement : le rendu Liquid Glass **n'a pas été observé visuellement** par l'auteur de ces lignes. Le workflow GitHub Actions compile l'app avec Xcode 26.6 et exécute les tests, ce qui valide les API et la compilation, pas l'esthétique rendue.
+Le projet est développé depuis Windows 11. Aucun simulateur iOS n'est disponible localement : le rendu Liquid Glass **n'a pas été observé visuellement** par l'auteur de ces lignes. Le workflow GitHub Actions compile l'app avec Xcode 26.3 et exécute les tests, ce qui valide les API et la compilation, pas l'esthétique rendue.
 
 Une revue visuelle sur un iPhone sous iOS 26 reste nécessaire, notamment pour :
 

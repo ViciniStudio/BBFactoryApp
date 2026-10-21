@@ -11,28 +11,28 @@ Application iOS native (SwiftUI) pour **B&B FACTORY**, le restaurant de burgers 
 | Code source | complet |
 | Contenu (horaires, carte) | issu de sources publiques, vérifié le 21/10/2026 |
 | Compilation locale Windows | impossible (pas de Xcode) |
-| Compilation GitHub Actions | **réussie** le 21/10/2026 (exécution #6) |
-| Tests unitaires | **32 tests réussis**, 0 échec |
-| IPA non signé | **généré** : `BBFactoryApp-1.0.0-6-unsigned.ipa` |
+| Compilation GitHub Actions | **réussie** le 21/10/2026 (exécution #10) |
+| Tests unitaires | **33 tests réussis**, 0 échec |
+| IPA non signé | **généré** : `BBFactoryApp-1.0.0-10-unsigned.ipa` |
 | Signature eSign | non effectuée |
 | Installation sur iPhone | non effectuée |
 
 Le workflow a produit un véritable IPA non signé et l'a publié dans l'artefact **`BBFactoryApp-Unsigned-IPA`**. Cet IPA n'est **ni signé ni installé** : il doit être signé (eSign ou autre) avant toute installation sur un iPhone.
 
-Dernière exécution vérifiée : [GitHub Actions #39602070591](https://github.com/ViciniStudio/BBFactoryApp/actions/runs/39602070591), commit `a10a649`.
+Dernière exécution vérifiée : [GitHub Actions #10 / 39616496509](https://github.com/ViciniStudio/BBFactoryApp/actions/runs/39616496509), commit `28a8e5e`.
 
 | Champ | Valeur vérifiée |
 | --- | --- |
-| Fichier | `BBFactoryApp-1.0.0-6-unsigned.ipa` |
-| Taille | 1 014 365 octets (≈ 991 Kio) |
-| SHA-256 | `c767c05445ff98e4a4f611a976b3a723ec2f3a14a72e1c9f0e6dbf79fac396d9` |
+| Fichier | `BBFactoryApp-1.0.0-10-unsigned.ipa` |
+| Taille | 1 181 640 octets (≈ 1 127 Kio) |
+| SHA-256 | `15a3cbdaf8a90c183194ac0ad0e88b1c7884bb313031776a9f17dab129dcb9e6` |
 | Bundle ID | `fr.vicinistudio.bbfactory` |
-| Version | 1.0.0 (build 2) |
+| Version | 1.0.0 (build 3) |
 | Minimum iOS | 18.0 |
 | Plateforme | `iphoneos`, arm64 |
-| Signature | absente (`codesign` négatif, aucun `mobileprovision`) |
+| Signature | absente (aucun `mobileprovision`, aucun `_CodeSignature`) |
 
-L'IPA a été retéléchargé depuis l'artefact et contrôlé : racine `Payload/`, binaire arm64, `Info.plist` (build 2), `Restaurant.json`, `PrivacyInfo.xcprivacy`, `Assets.car` contenant `HeroBurger`, aucune signature ni profil embarqué. Le SHA-256 correspond à celui publié par le workflow.
+L'IPA a été retéléchargé depuis l'artefact et contrôlé : racine `Payload/`, binaire arm64, `Info.plist` (build 3, minimum iOS 18.0), `Restaurant.json`, `PrivacyInfo.xcprivacy`, `Assets.car` contenant `HeroBurger` et `StoryKitchen`, aucune signature ni profil embarqué. Le SHA-256 correspond à celui publié par le workflow.
 
 ## Fonctionnalités
 
@@ -46,6 +46,7 @@ L'IPA a été retéléchargé depuis l'artefact et contrôlé : racine `Payload/
 
 ### Carte
 - 18 plats et prix issus du menu officiel ;
+- portions « entrée » ou « plat » affichées pour les salades proposées en deux tailles ;
 - recherche native ;
 - filtres par catégorie et favoris ;
 - fiche détaillée en feuille ;
@@ -53,6 +54,7 @@ L'IPA a été retéléchargé depuis l'artefact et contrôlé : racine `Payload/
 - états vides explicites, note sur les allergènes.
 
 ### La maison
+- héros photographique : le chef en cuisine, photo officielle de la maison ;
 - histoire de l'établissement et du chef ;
 - faits vérifiés ;
 - distinctions avec sources cliquables ;
@@ -71,18 +73,19 @@ L'IPA a été retéléchargé depuis l'artefact et contrôlé : racine `Payload/
 - **Repli** sur matériau translucide pour iOS 18.
 - Cartes de contenu opaques pour préserver la hiérarchie et les performances.
 - Palette crème / espresso / cuivre inspirée de l'identité publique, avec des couleurs dynamiques clair/sombre.
+- Transitions discrètes entre les onglets (fondu et légère remontée), désactivées avec Reduce Motion.
 - Accessibilité : Dynamic Type, VoiceOver, Reduce Motion, cibles 44 pt, contrastes renforcés.
 
 Détails et références Apple : [`docs/LIQUID_GLASS.md`](docs/LIQUID_GLASS.md).
 
 ## Stack
 
-- Swift 5 (mode langage), SwiftUI, iOS 18 minimum (SDK iOS 26.5, Xcode 26.6).
+- Swift 5 (mode langage), SwiftUI, iOS 18 minimum (SDK iOS 26.2, Xcode 26.3).
 - `@Observable` / MVVM léger.
 - Aucune dépendance externe, aucun réseau au runtime.
 - XCTest.
 - XcodeGen (`project.yml`) pour générer le projet.
-- GitHub Actions sur `macos-26` / Xcode 26.6.
+- GitHub Actions sur `macos-15-intel` / Xcode 26.3 (repli temporaire face à la pénurie de runners macOS arm64).
 - Bundle ID : `fr.vicinistudio.bbfactory`.
 
 ## Structure
@@ -165,7 +168,7 @@ xcodebuild test \
   -destination 'platform=iOS Simulator,name=iPhone 17'
 ```
 
-La CI ne dépend pas du nom « iPhone 17 » : elle sélectionne automatiquement le premier simulateur iPhone disponible et a exécuté **32 tests, 0 échec**.
+La CI ne dépend pas du nom « iPhone 17 » : elle sélectionne automatiquement le premier simulateur iPhone disponible et a exécuté **33 tests, 0 échec**.
 
 Couverture : horaires et fuseau, intégrité du JSON, URLs, itinéraire natif, favoris, chargement, filtres, symboles SF.
 
@@ -185,12 +188,12 @@ Couverture : horaires et fuseau, intégrité du JSON, URLs, itinéraire natif, f
 - [`docs/BUILD.md`](docs/BUILD.md) — Windows, XcodeGen, commandes, dépannage.
 - [`docs/RELEASE.md`](docs/RELEASE.md) — workflow, artefact, téléchargement.
 - [`docs/ESIGN.md`](docs/ESIGN.md) — signature et installation, diagnostics.
-- [`docs/ASSETS.md`](docs/ASSETS.md) — photo du héros, source et droits.
+- [`docs/ASSETS.md`](docs/ASSETS.md) — photos du héros et de la maison, sources et droits.
 
 ## Limites connues
 
 - L'IPA produit est **non signé** : il n'est pas installable tel quel et doit être signé avant l'installation.
-- Le rendu Liquid Glass n'a pas été vérifié visuellement sur un appareil (pas de Mac sur le poste de développement) ; il a été compilé avec le SDK iOS 26.5 et les tests passent.
+- Le rendu Liquid Glass n'a pas été vérifié visuellement sur un appareil (pas de Mac sur le poste de développement) ; il a été compilé avec le SDK iOS 26.2 et les tests passent.
 - Les horaires du vendredi soir (18:45) et les prix doivent être confirmés par l'établissement.
 - La photo du héros provient du site officiel B&B FACTORY ; les droits de diffusion doivent être confirmés par l'établissement avant une publication sur l'App Store. L'icône reste originale.
 - Aucune réservation, commande ou fidélité intégrée : l'app renvoie vers le téléphone et le site officiel.
