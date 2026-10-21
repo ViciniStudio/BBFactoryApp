@@ -11,28 +11,28 @@ Application iOS native (SwiftUI) pour **B&B FACTORY**, le restaurant de burgers 
 | Code source | complet |
 | Contenu (horaires, carte) | issu de sources publiques, vérifié le 21/10/2026 |
 | Compilation locale Windows | impossible (pas de Xcode) |
-| Compilation GitHub Actions | **réussie** le 21/10/2026 (exécution #4) |
+| Compilation GitHub Actions | **réussie** le 21/10/2026 (exécution #6) |
 | Tests unitaires | **32 tests réussis**, 0 échec |
-| IPA non signé | **généré** : `BBFactoryApp-1.0.0-4-unsigned.ipa` |
+| IPA non signé | **généré** : `BBFactoryApp-1.0.0-6-unsigned.ipa` |
 | Signature eSign | non effectuée |
 | Installation sur iPhone | non effectuée |
 
 Le workflow a produit un véritable IPA non signé et l'a publié dans l'artefact **`BBFactoryApp-Unsigned-IPA`**. Cet IPA n'est **ni signé ni installé** : il doit être signé (eSign ou autre) avant toute installation sur un iPhone.
 
-Dernière exécution vérifiée : [GitHub Actions #39599116247](https://github.com/ViciniStudio/BBFactoryApp/actions/runs/39599116247), commit `ceead59`.
+Dernière exécution vérifiée : [GitHub Actions #39602070591](https://github.com/ViciniStudio/BBFactoryApp/actions/runs/39602070591), commit `a10a649`.
 
 | Champ | Valeur vérifiée |
 | --- | --- |
-| Fichier | `BBFactoryApp-1.0.0-4-unsigned.ipa` |
-| Taille | 829 332 octets (≈ 810 Kio) |
-| SHA-256 | `a66ed13423a3140d6e646ad4afcf5b3d932ffa3adf2654320c5ed2cb584b20c5` |
+| Fichier | `BBFactoryApp-1.0.0-6-unsigned.ipa` |
+| Taille | 1 014 365 octets (≈ 991 Kio) |
+| SHA-256 | `c767c05445ff98e4a4f611a976b3a723ec2f3a14a72e1c9f0e6dbf79fac396d9` |
 | Bundle ID | `fr.vicinistudio.bbfactory` |
 | Version | 1.0.0 (build 2) |
 | Minimum iOS | 18.0 |
 | Plateforme | `iphoneos`, arm64 |
 | Signature | absente (`codesign` négatif, aucun `mobileprovision`) |
 
-L'IPA a été retéléchargé depuis l'artefact et contrôlé : racine `Payload/`, binaire arm64, `Info.plist`, `Restaurant.json`, `PrivacyInfo.xcprivacy`, aucune signature ni profil embarqué. Le SHA-256 correspond à celui publié par le workflow.
+L'IPA a été retéléchargé depuis l'artefact et contrôlé : racine `Payload/`, binaire arm64, `Info.plist` (build 2), `Restaurant.json`, `PrivacyInfo.xcprivacy`, `Assets.car` contenant `HeroBurger`, aucune signature ni profil embarqué. Le SHA-256 correspond à celui publié par le workflow.
 
 ## Fonctionnalités
 

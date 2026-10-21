@@ -10,16 +10,16 @@ Le workflow ne contient aucun certificat, aucun mot de passe et aucun secret App
 
 | Champ | Valeur |
 | --- | --- |
-| Exécution | [#4 — 39599116247](https://github.com/ViciniStudio/BBFactoryApp/actions/runs/39599116247) |
-| Commit | `ceead59` |
+| Exécution | [#6 — 39602070591](https://github.com/ViciniStudio/BBFactoryApp/actions/runs/39602070591) |
+| Commit | `a10a649` |
 | Artefact | `BBFactoryApp-Unsigned-IPA` |
-| Fichier | `BBFactoryApp-1.0.0-4-unsigned.ipa` |
-| Taille | 829 332 octets |
-| SHA-256 | `a66ed13423a3140d6e646ad4afcf5b3d932ffa3adf2654320c5ed2cb584b20c5` |
+| Fichier | `BBFactoryApp-1.0.0-6-unsigned.ipa` |
+| Taille | 1 014 365 octets |
+| SHA-256 | `c767c05445ff98e4a4f611a976b3a723ec2f3a14a72e1c9f0e6dbf79fac396d9` |
 | Tests | 32 exécutés, 0 échec |
 | Toolchain | Xcode 26.6 (17F113), Swift 6.3.3, SDK iOS 26.5 |
 
-L'IPA a été retéléchargé depuis l'artefact puis contrôlé : `Payload/BBFactoryApp.app` contient le binaire arm64, `Info.plist`, `Restaurant.json` et `PrivacyInfo.xcprivacy` ; aucun `embedded.mobileprovision` ni dossier `_CodeSignature` n'est présent. Le hash recalculé correspond à celui du workflow.
+L'IPA a été retéléchargé depuis l'artefact puis contrôlé : `Payload/BBFactoryApp.app` contient le binaire arm64, `Info.plist` (build 2), `Restaurant.json` (sans actualités) et `PrivacyInfo.xcprivacy` ; `Assets.car` contient `HeroBurger`. Aucun `embedded.mobileprovision` ni dossier `_CodeSignature` n'est présent. Le hash recalculé correspond à celui du workflow.
 
 Le numéro d'exécution augmente à chaque push et apparaît dans le nom de l'IPA ; `CFBundleVersion`, lui, reste défini dans `project.yml`.
 
@@ -84,7 +84,7 @@ Aucun `embedded.mobileprovision` ne doit être présent dans un IPA non signé.
 ## 5. Version et nommage
 
 - `CFBundleShortVersionString` : `1.0.0` (défini dans `project.yml`).
-- `CFBundleVersion` : `1`.
+- `CFBundleVersion` : `2`.
 - Nom de l'IPA : `BBFactoryApp-<version>-<numéro d'exécution>-unsigned.ipa`.
 - Nom de l'artefact : `BBFactoryApp-Unsigned-IPA`.
 - Conservation : 30 jours.
