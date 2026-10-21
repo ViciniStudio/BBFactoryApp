@@ -1,11 +1,21 @@
 import Foundation
 
 enum BBDate {
+    private static let parisTimeZone = TimeZone(identifier: "Europe/Paris") ?? .current
+
     private static let isoParser: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(identifier: "Europe/Paris")
+        formatter.timeZone = parisTimeZone
         formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+
+    private static let frenchFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "fr_FR")
+        formatter.timeZone = parisTimeZone
+        formatter.dateFormat = "d MMMM yyyy"
         return formatter
     }()
 
@@ -13,16 +23,14 @@ enum BBDate {
         isoParser.date(from: value)
     }
 
-    /// "2026-10-21" → "21 octobre 2026"
+    /// "2026-10-21" → "21 octobre 2026", always expressed in Paris time.
     static func frenchLong(_ value: String) -> String {
         guard let date = isoDate(value) else { return value }
-        return date.formatted(
-            .dateTime
-                .day()
-                .month(.wide)
-                .year()
-                .locale(Locale(identifier: "fr_FR"))
-        )
+        return frenchLong(date)
+    }
+
+    static func frenchLong(_ date: Date) -> String {
+        frenchFormatter.string(from: date)
     }
 }
 

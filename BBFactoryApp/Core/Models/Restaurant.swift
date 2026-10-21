@@ -143,13 +143,7 @@ struct Restaurant: Codable, Hashable, Sendable {
 
         var dateText: String {
             guard let dateValue else { return date }
-            return dateValue.formatted(
-                .dateTime
-                    .day()
-                    .month(.wide)
-                    .year()
-                    .locale(Locale(identifier: "fr_FR"))
-            )
+            return BBDate.frenchLong(dateValue)
         }
 
         var isDistinction: Bool { kind == "distinction" }

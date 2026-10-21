@@ -128,8 +128,8 @@ struct OpeningHours: Codable, Hashable, Sendable {
             for window in today.services {
                 guard let opens = window.opensMinutes,
                       let closes = window.closesMinutes,
-                      let start = calendar.date(byAdding: .minute, value: opens, to: dayStart),
-                      let end = calendar.date(byAdding: .minute, value: closes, to: dayStart)
+                      let start = Self.time(on: dayStart, minutes: opens, calendar: calendar),
+                      let end = Self.time(on: dayStart, minutes: closes, calendar: calendar)
                 else { continue }
 
                 // A window that ends at or before its start time extends past midnight.
@@ -152,7 +152,7 @@ struct OpeningHours: Codable, Hashable, Sendable {
             let windows = daySchedule.services.sorted { ($0.opensMinutes ?? 0) < ($1.opensMinutes ?? 0) }
             for window in windows {
                 guard let opens = window.opensMinutes,
-                      let start = calendar.date(byAdding: .minute, value: opens, to: day)
+                      let start = Self.time(on: day, minutes: opens, calendar: calendar)
                 else { continue }
                 if start > date {
                     return .closed(nextOpening: start)
@@ -161,6 +161,15 @@ struct OpeningHours: Codable, Hashable, Sendable {
         }
 
         return .closed(nextOpening: nil)
+    }
+
+    /// Builds a wall-clock time on `day`, so DST transitions keep the advertised local hour.
+    private static func time(on day: Date, minutes: Int, calendar: Calendar) -> Date? {
+        var components = calendar.dateComponents([.year, .month, .day], from: day)
+        components.hour = minutes / 60
+        components.minute = minutes % 60
+        components.second = 0
+        return calendar.date(from: components)
     }
 
     /// The schedule of the day containing `date`.
